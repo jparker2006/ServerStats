@@ -1,31 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
 body {
-    background-color: cadetblue;
+    background-color: white;
 }
 
 .button {
     background-color: white;
     color: black;
-    border: 1px solid cadetblue;
-    width: 40%;
-    height: 7%;
-    transition-duration: 0.3s;
-    font-family: "Trirong", serif;
+    width: auto;
+    height: auto;
+    padding: 9px;
     font-size: 20px;
     cursor: pointer;
+    border: 1px solid #00a550;
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 275px;
 }
 
-.button:hover {
-  background-color: cadetblue;
-  color: white;
-  border: white;
-}
-
-.SmallText {
+.Frame {
     color: black;
     font-size: 20px;
-    font-family: "Trirong", serif;
+    width: 400px;
+    height: auto;
+    background-color: white;
+    text-align: center;
+    border: 1px solid black;
+    position: absolute;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%);
+    font-family: 'Poppins', sans-serif;
+    -webkit-animation: Frame 1s ease-in-out 0.2s backwards;
+    -moz-animation: Frame 1s ease-in-out 0.2s backwards;
+	-ms-animation: Frame 1s ease-in-out 0.2s backwards;
+	-o-animation: Frame 1s ease-in-out 0.2s backwards;
+    animation: Frame 1s ease-in-out 0.2s backwards;
 }
-
 
 .Toast {
 	position: fixed;
@@ -36,8 +51,8 @@ body {
 }
 
 .ToastMsg {
-	font-family: 'Roboto', Helvetica, Arial, sans-serif;
-	background-color: darkgray;
+    font-family: 'Poppins', sans-serif;
+    background-color: #00a550;
 	display: inline-block;
 	min-width: 100px;
     padding: 5px 15px 5px 15px;
@@ -118,57 +133,23 @@ body {
 	}
 }
 
-.RoundedBox {
-    background-color: gold;
-    width: 93%;
-    transition: 0.2s;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 4px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 4px;
-    -webkit-animation: OpenBox 0.5s ease-in-out 0.1s backwards;
-    -moz-animation: OpenBox 0.5s ease-in-out 0.1s backwards;
-		-ms-animation: OpenBox 0.5s ease-in-out 0.1s backwards;
-		-o-animation: OpenBox 0.5s ease-in-out 0.1s backwards;
-    animation: OpenBox 0.5s ease-in-out 0.1s backwards;
-}
-
-@keyframes OpenBox {
+@keyframes Frame {
     0% {
+        top: -100px;
         opacity: 0.0;
-        filter: alpha(opacity=0);
-        -webkit-transform: rotateX(-90deg);
-				-moz-transform: rotateX(-90deg);
-        transform: rotateX(-90deg);
-    }
-    70% {
-        opacity: 1.0;
-        filter: alpha(opacity=100);
     }
     100% {
-        -webkit-transform-origin: top left;
-				-moz-transform-origin: top left;
-        transform-origin: top left;
+        top: 10px;
+        opacity: 1.0;
     }
 }
-@-webkit-keyframes OpenBox {
+@-webkit-keyframes Frame {
     0% {
+        top: -100px;
         opacity: 0.0;
-        filter: alpha(opacity=0);
-        -webkit-transform: rotateX(-90deg);
-				-moz-transform: rotateX(-90deg);
-        transform: rotateX(-90deg);
-    }
-    70% {
-        opacity: 1.0;
-        filter: alpha(opacity=100);
     }
     100% {
-        -webkit-transform-origin: top left;
-				-moz-transform-origin: top left;
-        transform-origin: top left;
+        top: 10px;
+        opacity: 1.0;
     }
 }

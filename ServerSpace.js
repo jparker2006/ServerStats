@@ -1,33 +1,19 @@
-"use strict";
-
 var onload = () => {
-    MainFunction();
+    MainFrame();
 }
 
-function MainFunction() {
-    var sPage = "";
-    sPage += "<div class='RoundedBox' style='text-align: center'>";
-    sPage += "<img style='width: 6%;' src='Images/servers.png'><br><br>";
-
-    sPage += "<div id='Feedback' class='SmallText'></div><br>";
+function MainFrame() {
+    let sPage = "";
+    sPage += "<div id='Feedback' class='Frame'></div>";
     sPage += "<button class='button' onClick='FindData()'>Refresh &#8635</button>";
-    sPage += "</div>";
     sPage += "<div id='Toast' class='Toast'></div>";
     document.getElementById('Main').innerHTML = sPage;
     FindData();
 }
 
 function FindData() {
-    Toast("Successful refresh!");
-    var objServerData = {};
-    objServerData.sFreeSpace = "";
-    objServerData.sServerUpTime = ""
-    objServerData.sFullDateToday = "";
-    objServerData.sDayOfWeek = "";
-    objServerData.sTimeRightNow = "";
-    objServerData.sTempOfServer = "";
-    postFileFromServer('ServerSpace.php', "ServerData=" + JSON.stringify(objServerData), DataCallack);
-    function DataCallack(data) {
+    postFileFromServer('ServerSpace.php', "", DataCallback);
+    function DataCallback(data) {
         if (data) {
             objServerData = JSON.parse(data);
 
@@ -41,12 +27,14 @@ function FindData() {
             display += "CPU Temp: ";
             display += sTempInCelcius.toFixed(1) + " c / ";
             display += CelToFah(sTempInCelcius) + " f";
+            display += "<br>Average system load<br>";
+            display += FormatSysLoad(objServerData.SystemLoad);
 
             document.getElementById('Feedback').innerHTML = display;
+            Toast("Successful refresh!");
         }
-        else {
+        else
             document.getElementById('Feedback').innerHTML = 'Failed';
-        }
     }
 }
 
@@ -80,6 +68,17 @@ function FormatUptime(sUptimeRaw) {
     sUptime += hours + ":" + sMins.padStart(2,'0');
     return sUptime;
 }
+
+function FormatSysLoad(jsonSysLoadAverages) {
+    let aSysLoadAves = JSON.parse(jsonSysLoadAverages);
+    let nOne, nFive, nFifteen;
+    nOne = aSysLoadAves[0]/4*100;
+    nFive = aSysLoadAves[1]/4*100;
+    nFifteen = aSysLoadAves[2]/4*100;
+    let sSysLoad = "1 min: " + nOne.toFixed(2) + "%<br> 5 mins: " + nFive.toFixed(2) + "%<br> 15 mins: " + nFifteen.toFixed(2) + "%";
+    return sSysLoad;
+}
+
 
 function postFileFromServer(url, sData, doneCallback) {
 	var xhr;
